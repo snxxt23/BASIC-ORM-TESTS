@@ -23,3 +23,11 @@ def student_list(request):
     #posts = Student.objects.filter(Q(surname__startswith='alex')|Q(surname__startswith='kumar'))
     
     return render(request,'output.html',{'posts':posts})
+
+
+def andquery(request):
+    posts = Student.objects.filter(age="19") & Student.objects.filter(classroom="10")
+    print(posts)
+    print(connection.queries)
+    return render(request,'output.html',{'posts':posts})
+

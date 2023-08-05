@@ -4,5 +4,6 @@ from .import views
 app_name = 'school'
 
 urlpatterns = [
-    path('',views.student_list,name='student_list'),
+    path('or',views.student_list,name='student_list'),
+    path('and',views.andquery,name="andquery"),
 ]
