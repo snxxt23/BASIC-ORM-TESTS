@@ -19,6 +19,7 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('school/',include('school.urls',namespace='school'))
+    # path('school/',include('school.urls',namespace='school')),
+    # path('newormapp/',include('newormapp.urls',namespace='newormap'))
 ]
 

@@ -8,4 +8,6 @@ urlpatterns = [
     path('and',views.andquery,name="andquery"),
     path('union',views.unionquery,name='unionquery'),
     path('not',views.notquery,name='notquery'),
+    path('selectandoutput',views.selectandoutput,name='selectandoutput'),
+    path('raw',views.raw,name='raw'),
 ]

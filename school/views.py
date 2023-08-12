@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Student,Teacher
 from django.db import connection
+from django.db.models import Q
 
 
 
@@ -40,9 +41,39 @@ def unionquery(request):
     return render (request,'output.html',{'posts':posts})
 
 
+# def notquery(request):
+#     posts = Student.objects.exclude(age=18) & Student.objects.exclude(age=20)
+#     print(posts)
+#     print(connection.queries)
+    
+#     return render(request,'output.html',{'posts':posts})
+
+#Q objects
+#~Q
+
 def notquery(request):
-    posts = Student.objects.exclude(age=18) & Student.objects.exclude(age=20)
+    posts = Student.objects.filter(~Q(age__gt=19))
+    print(posts)
+    return render(request,'output.html',{'posts':posts})
+
+#select and output individual fields
+def selectandoutput(request):
+    posts = Student.objects.filter(classroom=10).only('firstname','classroom')
     print(posts)
     print(connection.queries)
-    
     return render(request,'output.html',{'posts':posts})
+
+def raw_(request):
+    posts = Student.objects.raw("SELECT * FROM school_student WHERE age=19")
+    print(posts)
+    print(connection.queries)
+    return render(request,'output.html',{'posts':posts})
+
+#bypass simple orm 
+def raw(request):
+    cursor=connection.cursor()
+    cursor.execute("select * from school_student")
+    fetch = cursor.fetchone()
+    print(fetch)
+    print(connection.queries)
+    return render(request,'output.html',{'posts':fetch})
